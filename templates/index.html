@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My AI Chatbot</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- ================= Sidebar ================= -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+        <h2>My AI</h2>
+
+    <button id="themeBtn" class="theme-btn">
+        🌙
+    </button>
+</div>
+
+        <button id="newChatBtn">+ New Chat</button>
+
+        <button id="logoutBtn" class="logout-btn">
+    🚪 Logout
+</button>
+
+        <div class="menu">
+
+            <div class="menu-item">
+                🔍 
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="search"
+                    placeholder="Search Chats">
+            </div>
+
+            <div class="menu-item" id="libraryBtn">
+            📚 Library
+            </div>
+
+           <div class="menu-item" id="projectsBtn">
+           📁 Projects
+           </div>
+
+          <div class="menu-item" id="appsBtn">
+          ✳ Apps
+          </div>
+
+        <div class="menu-item" id="moreBtn">
+        ⋯ More
+        </div>
+ </div>
+
+        <div class="sidebar-title">
+            Recents
+        </div>
+
+        <div id="recentChats"></div>
+
+    </div>
+
+    <!-- ================= Chat Area ================= -->
+
+    <div class="chat-area">
+
+        <div class="welcome">
+            <h1>What's on your agenda today?</h1>
+        </div>
+
+        <div id="chat-box" class="chat-box"></div>
+
+        <!-- ================= Input ================= -->
+
+        <div class="input-area">
+
+            <button id="attachBtn">📎</button>
+
+            <button id="cameraBtn">📷</button>
+
+            <button id="micBtn">🎤</button>
+
+            <input
+                type="file"
+                id="fileInput"
+                hidden>
+
+            <input
+                type="file"
+                id="cameraInput"
+                accept="image/*"
+                capture="environment"
+                hidden>
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Message AI...">
+
+            <button id="sendBtn">
+                ▶
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

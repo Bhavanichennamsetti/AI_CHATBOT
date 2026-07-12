@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AI Chatbot</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <h1>Welcome Back</h1>
+
+    <form action="/login" method="POST">
+
+        <input
+            type="text"
+            name="username"
+            autocomplete="off"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            autocomplete="new-password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <p>
+        Don't have an account?
+        <a href="/signup">Sign Up</a>
+    </p>
+
+</div>
+
+<script src="{{ url_for('static', filename='auth.js') }}"></script>
+<script>
+window.onload = function () {
+    document.querySelector('input[name="username"]').value = "";
+    document.querySelector('input[name="password"]').value = "";
+};
+</script>
+
+</body>
+</html>
