@@ -202,7 +202,7 @@ if (typing) {
             conversation_id = data.conversation_id;
 
             if (isNewchat) {
-                addRecentChat(message);
+            await loadRecentChats(message);
                 isNewchat = false;
             }
         }
@@ -271,25 +271,25 @@ async function loadRecentChats() {
 
     recentChats.forEach(chat => {
         recentDiv.innerHTML += `
-            <div class="menu-item recent-chat">
+        <div class="menu-item recent-chat">
 
-    <span onclick="openConversation(${chat.id})">
-        💬 ${chat.title}
-    </span>
+            <span onclick="openConversation(${chat.id})">
+                💬 ${chat.title}
+            </span>
 
-    <span onclick="event.stopPropagation(); renameConversation(${chat.id})">
-✏️
-</span>
+            <span onclick="event.stopPropagation(); renameConversation(${chat.id})">
+                ✏️
+            </span>
 
-<span class="delete-chat"
-onclick="event.stopPropagation(); deleteConversation(${chat.id})">
-🗑️
-</span>
+            <span class="delete-chat"
+                  onclick="event.stopPropagation(); deleteConversation(${chat.id})">
+                🗑️
+            </span>
 
-</div>
-        `;
+        </div>`;
     });
 }
+
 
 loadRecentChats();
 const searchInput = document.getElementById("searchInput");
@@ -502,3 +502,4 @@ if (logoutBtn) {
 
     });
 }
+loadRecentChats();
