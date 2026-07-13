@@ -12,7 +12,7 @@ function getCurrentTime() {
     });
 
 }
-function addRecentChat(message) {
+function addRecentChat() {
 
     const title = message.length > 30
         ? message.substring(0, 30) + "..."
@@ -178,9 +178,10 @@ chatBox.scrollTop = chatBox.scrollHeight;
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                message: message,
-                conversation_id: conversation_id
-            })
+    message: message,
+    conversation_id: conversation_id,
+    web_search: document.getElementById("webSearch").checked
+})
         });
        
 
@@ -199,13 +200,14 @@ if (typing) {
 }
 
         if (data.conversation_id) {
-            conversation_id = data.conversation_id;
+    conversation_id = data.conversation_id;
 
-            if (isNewchat) {
-            await loadRecentChats(message);
-                isNewchat = false;
-            }
-        }
+    if (isNewchat) {
+        isNewchat = false;
+    }
+
+    await loadRecentChats();
+}
 
         chatBox.innerHTML += `
 <div class="message bot">
@@ -273,7 +275,7 @@ async function loadRecentChats() {
         recentDiv.innerHTML += `
         <div class="menu-item recent-chat">
 
-            <span onclick="openConversation(${chat.id})">
+            <span class="chat-title" data-id="${chat.id}">
                 💬 ${chat.title}
             </span>
 
@@ -502,4 +504,3 @@ if (logoutBtn) {
 
     });
 }
-loadRecentChats();

@@ -1,66 +1,57 @@
 # 🤖 My AI Chatbot
 
-A modern AI chatbot built using **Flask**, **Python**, **HTML**, **CSS**, **JavaScript**, **SQLite**, and the **Groq API**. The chatbot provides a ChatGPT-like interface with conversation history, authentication, chat management, and a responsive user experience.
+A modern AI chatbot built with **Python**, **Flask**, **Groq LLM**, **Tavily Web Search**, **SQLite**, **HTML**, **CSS**, and **JavaScript**.
+
+The chatbot provides real-time AI conversations with conversation memory, web search support, user authentication, and a clean ChatGPT-inspired interface.
 
 ---
 
-# 📌 Features
+# 🚀 Features
 
-### 🔐 User Authentication
-- User Signup
-- User Login
-- Secure Logout
-- Password hashing for security
-
-### 💬 AI Chat
-- Chat with AI using the Groq API
-- Fast AI-generated responses
-- Typing indicator while AI is generating a reply
-- Error handling for API and network issues
-
-### 📝 Chat Management
-- Create New Chat
-- Automatically save conversations
-- View previous conversations
-- Rename conversations
-- Delete conversations
-- Search previous chats
-
-### 🎨 User Interface
-- Dark/Light Theme Toggle
-- Responsive Design
-- Clean ChatGPT-style interface
-- Copy AI responses
-- Edit user messages before resending
-
-### 📂 Additional Features
-- File Upload Button
-- Camera Image Upload Button
-- Conversation history stored in SQLite database
+- 🔐 User Login & Signup
+- 👤 Multiple User Accounts
+- 💬 AI Chat using Groq (Llama 3.3 70B)
+- 🌐 Web Search using Tavily API
+- 🔍 Web Search ON/OFF Toggle
+- 🧠 Conversation Memory
+- 💾 Stores Chat History in SQLite
+- 📂 Multiple Conversations
+- ✏️ Rename Conversations
+- 🗑 Delete Conversations
+- 🔎 Search Previous Chats
+- 🎤 Voice Input (Speech Recognition)
+- 📷 Camera Image Upload
+- 📎 File Attachment
+- 📋 Copy AI Responses
+- ✏️ Edit User Messages
+- 🌙 Dark / Light Theme
+- ⚡ Typing Indicator
+- 🔒 Secure Password Hashing
+- 📱 Responsive UI
+- 🎨 ChatGPT-style Interface
 
 ---
 
 # 🛠 Technologies Used
 
+## Backend
+
+- Python
+- Flask
+- Groq API
+- Tavily API
+- SQLite
+- python-dotenv
+
 ## Frontend
+
 - HTML5
 - CSS3
 - JavaScript
 
-## Backend
-- Python
-- Flask
-
-## Database
-- SQLite
-
-## AI Model
-- Groq API
-- Llama-3.3-70B-Versatile
-
 ---
 
-# 📁 Project Structure
+# 📂 Project Structure
 
 ```
 AI-Chatbot/
@@ -68,9 +59,8 @@ AI-Chatbot/
 ├── app.py
 ├── database.py
 ├── chat.db
-├── requirements.txt
-├── README.md
 ├── .env
+├── requirements.txt
 │
 ├── templates/
 │   ├── index.html
@@ -80,46 +70,53 @@ AI-Chatbot/
 ├── static/
 │   ├── style.css
 │   ├── script.js
-│   └── uploads/
+│   └── images/
 │
-└── screenshots/
+└── README.md
 ```
 
 ---
 
 # ⚙ Installation
 
-## 1. Clone the Repository
+Clone the repository
 
 ```bash
-git clone 
+git clone https://github.com/your-username/AI-Chatbot.git
 ```
 
-## 2. Move into the Project Folder
+Go to project folder
 
 ```bash
 cd AI-Chatbot
 ```
 
-## 3. Install Dependencies
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 4. Create a `.env` File
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file.
 
 ```env
 GROQ_API_KEY=your_groq_api_key
+TAVILY_API_KEY=your_tavily_api_key
 ```
 
-## 5. Run the Application
+---
+
+# ▶ Run the Project
 
 ```bash
 python app.py
 ```
 
-## 6. Open in Browser
+Open your browser
 
 ```
 http://127.0.0.1:5000
@@ -127,68 +124,61 @@ http://127.0.0.1:5000
 
 ---
 
-# 🚀 How to Use
+# 🧠 Conversation Memory
 
-1. Register a new account.
-2. Login using your credentials.
-3. Start a new chat.
-4. Ask questions to the AI.
-5. Rename or delete conversations.
-6. Search previous chats.
-7. Switch between Dark and Light themes.
-8. Logout securely when finished.
+The chatbot remembers previous messages within the current conversation.
+
+Conversation history is stored in SQLite and automatically sent to the Groq model, allowing the AI to answer based on earlier messages.
 
 ---
 
-# 🗄 Database
+# 🌐 Web Search
 
-SQLite stores:
+The chatbot supports live internet search using the Tavily API.
 
-- User Accounts
-- Conversation Titles
-- Chat Messages
-- AI Responses
+- Web Search ON → AI answers using the latest internet information.
+- Web Search OFF → AI answers using only its built-in knowledge.
 
 ---
 
-# ✨ Key Features
+# 🔒 Authentication
 
-- Secure Login System
-- Persistent Chat History
-- AI Response Generation
-- Conversation Search
-- Rename Conversations
-- Delete Conversations
-- Dark/Light Mode
-- Copy AI Responses
-- Edit Messages
-- Responsive UI
-- Error Handling
+Users can
+
+- Register
+- Login
+- Logout
+
+Passwords are securely stored using Werkzeug password hashing.
 
 ---
 
 # 📸 Screenshots
 
-Add screenshots of:
+Add screenshots here.
+
+Example:
 
 - Login Page
-- Signup Page
-- Main Chat Screen
+- Home Page
+- Chat Screen
 - Dark Mode
-- Conversation History
+- Web Search Toggle
 
 ---
 
-# 🔮 Future Enhancements
+# 🔮 Future Improvements
 
-- Voice Input
-- Voice Output
-- PDF Document Chat
 - Image Understanding
-- Multiple AI Models
-- RAG (Retrieval-Augmented Generation)
-- Export Chat History
-- User Profile Settings
+- PDF Chat
+- Streaming AI Responses
+- Voice Reply
+- Code Syntax Highlighting
+- Markdown Rendering
+- AI Image Generation
+- Export Chats as PDF
+- Mobile App
+- Docker Deployment
 
 ---
 
@@ -196,8 +186,13 @@ Add screenshots of:
 
 **Mounika Chennamsetti**
 
+GitHub:
+https://github.com/your-username
+
 ---
 
-# 📄 License
+# ⭐ Support
 
-This project was developed for educational and academic purposes.
+If you like this project, consider giving it a ⭐ on GitHub.
+
+It helps others discover the project and motivates future improvements.

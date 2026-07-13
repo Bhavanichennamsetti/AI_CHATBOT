@@ -2,9 +2,15 @@ from flask import Flask, render_template, request, jsonify,redirect,url_for,sess
 from groq import Groq
 from dotenv import load_dotenv
 from database import (create_conversation,create_tables,save_message,get_messages,get_conversations,update_title,delete_conversation,create_user,login_user,rename_conversation)
+from  tavily import TavilyClient
+import traceback
 import os
 
+
 load_dotenv()
+ 
+print("GROQ:", os.getenv("GROQ_API_KEY"))
+print("TAVILY:", os.getenv("TAVILY_API_KEY"))
 
 app = Flask(__name__) 
 app.secret_key = "your_secret_key_123"     
@@ -12,6 +18,7 @@ app.secret_key = "your_secret_key_123"
 create_tables()
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 
 @app.route("/")
@@ -101,41 +108,62 @@ def chat():
         data = request.get_json()
 
         message = data["message"]
+        web_search = data.get("web_search", True)
         conversation_id = data.get("conversation_id")
 
         if conversation_id is None:
             conversation_id = create_conversation(session["user_id"])
             update_title(conversation_id, message[:30])
 
+        # Save user message
         save_message(conversation_id, "user", message)
+
+        # ---------------- WEB SEARCH ----------------
+        web_context = ""
+
+        if web_search:
+            search_result = tavily.search(
+                query=message,
+                search_depth="advanced",
+                max_results=5
+            )
+
+            for result in search_result["results"]:
+                web_context += f"""
+Title: {result['title']}
+URL: {result['url']}
+Content: {result['content']}
+
+"""
+
+        # ---------------- GROQ ----------------
+        history = get_messages(conversation_id)
+
+        messages = [
+            {
+                "role": "system",
+                "content": f"""
+You are a helpful AI assistant.
+
+If web search results are provided, use them to answer accurately.
+If no web search results are available, answer using your own knowledge.
+
+Web Search Results:
+{web_context}
+"""
+            }
+        ]
+
+        messages.extend(history)
 
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """
-You are a helpful AI assistant.
-
-Rules:
-- If hello then give hello.
-- Use bullet points when needed.
-- End with a short summary.
-- Give short and direct answers.
-- Use points only when needed.
-- Write only 2-4 short paragraphs.
-- Do not give long explanations unless asked.
-- Give large explanations with paragraphs and points if needed.
-"""
-                },
-                {
-                    "role": "user",
-                    "content": message
-                }
-            ]
+            messages=messages
         )
 
         ai_reply = response.choices[0].message.content
+
+         # Save AI reply
         save_message(conversation_id, "assistant", ai_reply)
 
         ai_reply = ai_reply.replace("\n", "<br>")
@@ -146,11 +174,11 @@ Rules:
         })
 
     except Exception as e:
-        print("Error:", e)
-
+        traceback.print_exc()
         return jsonify({
-            "reply": "⚠️ Sorry! Something went wrong. Please try again later."
+            "reply": str(e)
         }), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
