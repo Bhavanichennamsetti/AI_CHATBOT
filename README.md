@@ -82,13 +82,13 @@ AI-Chatbot/
 Clone the repository
 
 ```bash
-git clone https://github.com/your-username/AI-Chatbot.git
+git clone https://github.com/Bhavanichennamsetti/AI-CHATBOT.git
 ```
 
 Go to project folder
 
 ```bash
-cd AI-Chatbot
+cd AI-CHATBOT
 ```
 
 Install dependencies
@@ -187,7 +187,7 @@ Example:
 **Mounika Chennamsetti**
 
 GitHub:
-https://github.com/your-username
+https://github.com/Bhavanichennamsetti
 
 ---
 
